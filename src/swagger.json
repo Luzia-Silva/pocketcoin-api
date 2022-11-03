@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pocket Coin",
+    "description": "Documentation from pocket coin api",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+  "paths": {
+    "/v1/user": {
+      "post": {
+        "tags": ["Create user"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "surname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "email"
+                  },
+                  "password": {
+                    "type": "password"
+                  }
+                },
+                "example": {
+                  "name": "yourname",
+                  "surname": "yoursurname",
+                  "email": "youremail@youremail.com",
+                  "password": "yourpassword"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "description": "Rota que busca o usuário pelo e-mail",
+        "sumary": "Busca o usuário pelo e-mail",
+        "tags": ["FindOneUser"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota que deleta pelo e-mail",
+        "sumary": "Busca o usuário pelo e-mail",
+        "tags": ["Delete"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "description": "Rota que busca todos os usuários",
+        "sumary": "Busca todos os usuários",
+        "tags": ["Find users"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/news": {
+      "get": {
+        "description": "Rota que busca todas as notícias",
+        "sumary": "Busca todas as notícias",
+        "tags": ["Find news"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

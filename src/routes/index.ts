@@ -1,4 +1,6 @@
 import { Router } from "express";
+import AmountController from "../controller/AmountController";
+
 import NewsController from "../controller/NewsController";
 
 import UserController from "../controller/UserController";
@@ -13,4 +15,8 @@ routes.get("/v1/users", UserController.find);
 
 // Routes news
 routes.get("/v1/news", NewsController.find);
+
+// Routes Amounts
+routes.get("/v1/amount", AmountController.find);
+
 export default routes;

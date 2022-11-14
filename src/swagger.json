@@ -116,6 +116,18 @@
           }
         }
       }
+    },
+    "/v1/amount": {
+      "get": {
+        "description": "Rota que busca ",
+        "sumary": "Busca todos os usuários",
+        "tags": ["Find users"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }

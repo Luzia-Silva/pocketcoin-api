@@ -6,13 +6,14 @@ import routes from "./routes";
 import cors from "cors";
 
 const app = express();
-mongoose.connect("mongodb://localhost/pocketcoin");
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 app.use(routes);
-
+mongoose.connect("mongodb://localhost:27017/pocketcoin").then(() => {
+  console.log("connected to database mongodb");
+});
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-app.listen(8080, () => {
-  console.log("server is listening on http://localhost:8080/");
+app.listen(7777, () => {
+  console.log("server is listening on http://localhost:7777/");
 });

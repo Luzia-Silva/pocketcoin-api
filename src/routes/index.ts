@@ -2,7 +2,6 @@ import { Router } from "express";
 import NewsController from "../controller/NewsController";
 
 import UserController from "../controller/UserController";
-import crawler from "../crawler";
 
 const routes = Router();
 

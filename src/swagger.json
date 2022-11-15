@@ -57,15 +57,15 @@
         }
       }
     },
-    "/v1/delete": {
+    "/v1/delete/": {
       "delete": {
         "description": "Rota que deleta pelo e-mail",
         "sumary": "Busca o usuário pelo e-mail",
         "tags": ["Users"],
         "parameters": [
           {
-            "in": "query",
-            "name": "email",
+            "in": "path",
+            "name": "id",
             "type": "string",
             "required": true
           }

@@ -10,7 +10,7 @@ const routes = Router();
 // Routes Users
 routes.post("/v1/user", UserController.create);
 routes.post("/v1/auth", UserController.auth);
-routes.delete("/v1/delete", UserController.delete);
+routes.delete("/v1/delete/:id", UserController.delete);
 routes.get("/v1/users", UserController.find);
 
 // Routes news

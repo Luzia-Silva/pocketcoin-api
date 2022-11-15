@@ -1,7 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import User from "../database/schemas/User";
-
+import jwt from "jsonwebtoken";
 class UserController {
   async create(request: Request, response: Response) {
     const { name, surname, category, amount, email, password } = request.body;
@@ -35,9 +35,17 @@ class UserController {
       if (user) {
         const comparePassword = bcrypt.compareSync(password, user.password);
         if (comparePassword) {
+          const secret = process.env.SECRET;
+          const token = jwt.sign(
+            {
+              _id: user._id
+            },
+            String(secret)
+          );
+
           response
             .status(200)
-            .json({ error: false, message: "Valid password" });
+            .json({ message: "authentication performed successfully", token });
         } else {
           response
             .status(400)
@@ -56,29 +64,29 @@ class UserController {
     }
   }
   async delete(request: Request, response: Response) {
-    const { email } = request.query;
+    const { _id } = request.params;
     try {
-      const userExists = await User.findOne({ email });
-      if (!userExists) {
+      const userExists = await User.findOne({ _id });
+      if (!_id) {
         return response.status(400).json({
           error: true,
           message: "This record does not exist"
         });
       }
       const user = await User.deleteOne({
-        email
+        _id
       });
       return response.json(user);
     } catch (error) {
       return response.status(500).send({
         error: true,
-        message: "This record does not exist"
+        message: "This error in application"
       });
     }
   }
 
   async find(request: Request, response: Response) {
-    const { name, surname, category, email, password } = request.body;
+    const { name, surname, category, email } = request.body;
     try {
       const users = await User.find();
       return response.json(users);

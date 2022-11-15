@@ -20,7 +20,7 @@
   "paths": {
     "/v1/user": {
       "post": {
-        "tags": ["Create user"],
+        "tags": ["Users"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -55,29 +55,13 @@
             "description": "OK"
           }
         }
-      },
-      "get": {
-        "description": "Rota que busca o usuário pelo e-mail",
-        "sumary": "Busca o usuário pelo e-mail",
-        "tags": ["FindOneUser"],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "email",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
+      }
+    },
+    "/v1/delete": {
       "delete": {
         "description": "Rota que deleta pelo e-mail",
         "sumary": "Busca o usuário pelo e-mail",
-        "tags": ["Delete"],
+        "tags": ["Users"],
         "parameters": [
           {
             "in": "query",
@@ -97,7 +81,7 @@
       "get": {
         "description": "Rota que busca todos os usuários",
         "sumary": "Busca todos os usuários",
-        "tags": ["Find users"],
+        "tags": ["Users"],
         "responses": {
           "200": {
             "description": "OK"
@@ -105,11 +89,12 @@
         }
       }
     },
+
     "/v1/news": {
       "get": {
         "description": "Rota que busca todas as notícias",
-        "sumary": "Busca todas as notícias",
-        "tags": ["Find news"],
+        "sumary": "Busca pelas notícias",
+        "tags": ["News"],
         "responses": {
           "200": {
             "description": "OK"
@@ -121,7 +106,38 @@
       "get": {
         "description": "Rota que busca ",
         "sumary": "Busca todos os usuários",
-        "tags": ["Find users"],
+        "tags": ["Amounts"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth": {
+      "post": {
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email"
+                  },
+                  "password": {
+                    "type": "password"
+                  }
+                },
+                "example": {
+                  "email": "youremail@youremail.com",
+                  "password": "yourpassword"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"

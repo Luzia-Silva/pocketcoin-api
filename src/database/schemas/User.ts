@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-
 const User = new mongoose.Schema({
   name: {
     type: String,
@@ -23,8 +22,7 @@ const User = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
-    select: false
+    required: true
   },
   createdAt: {
     type: Date,

@@ -1,3 +1,4 @@
+import * as bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import User from "../database/schemas/User";
 
@@ -27,21 +28,24 @@ class UserController {
       });
     }
   }
-  async findOne(request: Request, response: Response) {
-    const { email } = request.query;
+  async auth(request: Request, response: Response) {
+    const { email, password } = request.body;
     try {
-      const users = await User.findOne({ email });
-      if (!users) {
-        return response.status(400).json({
-          error: "406",
-          message: "There is no user with this registered email"
-        });
+      const user = await User.findOne({ email: email });
+      if (user) {
+        const comparePassword = bcrypt.compareSync(password, user.password);
+        if (comparePassword) {
+          response.status(200).json({ message: "Valid password" });
+        } else {
+          response.status(400).json({ error: "Invalid Password" });
+        }
+      } else {
+        response.status(401).json({ error: "User does not exist" });
       }
-      return response.json(users);
     } catch (error) {
       return response.status(500).send({
-        error: "Something wrong happened, try again",
-        message: error
+        error: error,
+        message: "error in backend"
       });
     }
   }

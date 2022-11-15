@@ -14,6 +14,11 @@ const User = new mongoose.Schema({
     required: true,
     default: ["all"]
   },
+  amount: {
+    type: Array,
+    required: true,
+    default: ["all"]
+  },
   email: {
     type: String,
     required: true,

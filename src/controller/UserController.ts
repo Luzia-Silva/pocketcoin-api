@@ -4,12 +4,12 @@ import User from "../database/schemas/User";
 
 class UserController {
   async create(request: Request, response: Response) {
-    const { name, surname, category, email, password } = request.body;
+    const { name, surname, category, amount, email, password } = request.body;
     try {
       const userExists = await User.findOne({ email });
       if (userExists) {
         return response.status(400).json({
-          error: "400",
+          error: true,
           message: "User already exists"
         });
       }
@@ -23,8 +23,8 @@ class UserController {
       return response.json(user);
     } catch (error) {
       return response.status(500).send({
-        error: "Registration failed",
-        message: error
+        error: true,
+        message: "Registration failed"
       });
     }
   }
@@ -35,12 +35,18 @@ class UserController {
       if (user) {
         const comparePassword = bcrypt.compareSync(password, user.password);
         if (comparePassword) {
-          response.status(200).json({ message: "Valid password" });
+          response
+            .status(200)
+            .json({ error: false, message: "Valid password" });
         } else {
-          response.status(400).json({ error: "Invalid Password" });
+          response
+            .status(400)
+            .json({ error: true, message: "Invalid Password" });
         }
       } else {
-        response.status(401).json({ error: "User does not exist" });
+        response
+          .status(401)
+          .json({ error: true, message: "User does not exist" });
       }
     } catch (error) {
       return response.status(500).send({
@@ -55,7 +61,7 @@ class UserController {
       const userExists = await User.findOne({ email });
       if (!userExists) {
         return response.status(400).json({
-          error: "404",
+          error: true,
           message: "This record does not exist"
         });
       }
@@ -65,8 +71,8 @@ class UserController {
       return response.json(user);
     } catch (error) {
       return response.status(500).send({
-        error: "This record does not exist",
-        message: error
+        error: true,
+        message: "This record does not exist"
       });
     }
   }
@@ -78,8 +84,8 @@ class UserController {
       return response.json(users);
     } catch (error) {
       return response.status(500).send({
-        error: "This record does not exist",
-        message: error
+        error: true,
+        message: "This record does not exist"
       });
     }
   }

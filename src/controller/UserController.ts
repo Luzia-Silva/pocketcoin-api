@@ -29,21 +29,22 @@ class UserController {
       });
     }
   }
-  async auth(request: Request, response: Response) {
+  async login(request: Request, response: Response) {
     const { email, password } = request.body;
     try {
       const user = await User.findOne({ email: email });
       if (user) {
         const comparePassword = bcrypt.compareSync(password, user.password);
         if (comparePassword) {
-          const secret = process.env.SECRET;
           const token = jwt.sign(
             {
               _id: user._id
             },
-            String(secret)
+            String(process.env.SECRET),
+            {
+              expiresIn: "24h"
+            }
           );
-
           response
             .status(200)
             .json({ message: "authentication performed successfully", token });
@@ -64,6 +65,16 @@ class UserController {
       });
     }
   }
+  // async authenticate(request: Request, response: Response, next) {
+  //   try {
+  //     const token = request.headers.authorization?.split(" ")[1];
+  //     const decode = jwt.verify(token || "", String(process.env.SECRET));
+  //     next();
+  //   } catch (error) {
+  //     if (error.name === "TokenExpired") {
+  //     }
+  //   }
+  // }
   async delete(request: Request, response: Response) {
     const { _id } = request.params;
     try {

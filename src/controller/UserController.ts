@@ -17,6 +17,7 @@ class UserController {
         name,
         surname,
         category,
+        amount,
         email,
         password
       });

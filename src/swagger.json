@@ -107,6 +107,14 @@
         "description": "Rota que busca ",
         "sumary": "Busca todos os usuários",
         "tags": ["Amounts"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "amount",
+            "type": "string",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { request } from "http";
 import crawler from "../crawler";
 
 class NewsController {
@@ -17,4 +16,4 @@ class NewsController {
     }
   }
 }
-export default new NewsController()
+export default new NewsController();

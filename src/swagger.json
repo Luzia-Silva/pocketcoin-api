@@ -77,6 +77,26 @@
         }
       }
     },
+    "/v1/users/": {
+      "get": {
+        "description": "Rota que busca um usário pelo id pelo e-mail",
+        "sumary": "Busca o usuário pelo id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/users": {
       "get": {
         "description": "Rota que busca todos os usuários",
@@ -89,7 +109,6 @@
         }
       }
     },
-
     "/v1/news": {
       "get": {
         "description": "Rota que busca todas as notícias",

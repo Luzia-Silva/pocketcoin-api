@@ -12,6 +12,7 @@ routes.post("/v1/user", UserController.create);
 routes.post("/v1/login", UserController.login);
 routes.delete("/v1/delete/:id", UserController.delete);
 routes.get("/v1/users", UserController.find);
+routes.get("/v1/users/:id", UserController.findOne);
 
 // Routes news
 routes.get("/v1/news", NewsController.find);

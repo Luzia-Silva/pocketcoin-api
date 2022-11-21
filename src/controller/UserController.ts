@@ -45,9 +45,11 @@ class UserController {
               expiresIn: "24h"
             }
           );
-          response
-            .status(200)
-            .json({ message: "authentication performed successfully", token });
+          return response.status(200).json({
+            user,
+            message: "authentication performed successfully",
+            token
+          });
         } else {
           response
             .status(400)
@@ -65,16 +67,6 @@ class UserController {
       });
     }
   }
-  // async authenticate(request: Request, response: Response, next) {
-  //   try {
-  //     const token = request.headers.authorization?.split(" ")[1];
-  //     const decode = jwt.verify(token || "", String(process.env.SECRET));
-  //     next();
-  //   } catch (error) {
-  //     if (error.name === "TokenExpired") {
-  //     }
-  //   }
-  // }
   async delete(request: Request, response: Response) {
     const { _id } = request.params;
     try {
@@ -93,6 +85,18 @@ class UserController {
       return response.status(500).send({
         error: true,
         message: "This error in application"
+      });
+    }
+  }
+  async findOne(request: Request, response: Response) {
+    const { id } = request.params;
+    try {
+      const user = await User.findById(id);
+      return response.json(user);
+    } catch (error) {
+      return response.status(500).send({
+        error: true,
+        message: "This record does not exist"
       });
     }
   }

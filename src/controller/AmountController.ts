@@ -21,7 +21,7 @@ class AmountController {
     }
   }
   async find(request: Request, response: Response) {
-    const coins = "USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR,CHF-BRL";
+    const coins = "USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR";
     try {
       const { data } = await axios(
         `https://economia.awesomeapi.com.br/last/${coins}`

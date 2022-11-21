@@ -20,5 +20,6 @@ routes.get("/v1/news", NewsController.find);
 // Routes Amounts
 routes.get("/v1/amount/:coins", AmountController.findOne);
 routes.get("/v1/amount", AmountController.find);
+routes.get("/v1/list", AmountController.findlist);
 
 export default routes;

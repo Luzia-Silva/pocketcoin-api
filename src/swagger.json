@@ -121,7 +121,19 @@
         }
       }
     },
-    "/v1/amount": {
+    "/v1/list": {
+      "get": {
+        "description": "Rota que busca todas as moedas",
+        "sumary": "Busca pelas moedas do sistema",
+        "tags": ["Amounts"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/amount/": {
       "get": {
         "description": "Rota que busca ",
         "sumary": "Busca todos os usuários",

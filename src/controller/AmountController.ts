@@ -38,5 +38,23 @@ class AmountController {
       });
     }
   }
+  async findlist(request: Request, response: Response) {
+    const coins = "USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR";
+    try {
+      const { data } = await axios(
+        `https://economia.awesomeapi.com.br/last/${coins}`
+      );
+      const amount = Object.entries(data).map(([key, value]) => ({
+        coin: key,
+        elements: value
+      }));
+      return response.json(amount);
+    } catch (error) {
+      return response.status(500).send({
+        error: "Something wrong happened, try again",
+        message: error
+      });
+    }
+  }
 }
 export default new AmountController();

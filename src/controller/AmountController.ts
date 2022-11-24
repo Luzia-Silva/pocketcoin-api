@@ -39,7 +39,8 @@ class AmountController {
     }
   }
   async findlist(request: Request, response: Response) {
-    const coins = "USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR";
+    const coins =
+      "GBP-BRL,ARS-BRL,AUD-BRL,CHF-BRL,CAD-BRL,CNY-BRL,CLP-BRL,PYG-BRL,UYU-BRL,COP-BRL,PEN-BRL,BOB-BRL";
     try {
       const { data } = await axios(
         `https://economia.awesomeapi.com.br/last/${coins}`
